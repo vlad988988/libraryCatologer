@@ -1,0 +1,59 @@
+﻿@model IEnumerable<libraryCataloger.Models.BookViewModel>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Список книг</h2>
+
+@using (Html.BeginForm())
+{
+    <h5>Поиск:</h5>
+    <div class="active-cyan-4 mb-2">
+        @Html.TextBox("searchTitle", "", new { placeholder = "По книге", @class = "form-control" })
+    </div>
+    <div class="active-cyan-4 mb-2">
+        @Html.TextBox("searchAuthor", "", new { placeholder = "По автору", @class = "form-control" })
+    </div>
+    <div class="active-cyan-4 mb-2">
+        @Html.TextBox("searchPublisher", "", new { placeholder = "По издателю", @class = "form-control" })
+    </div>
+
+    <button type="submit" class="btn btn-default" type="submit">Поиск</button><br />
+}
+
+<table class="table">
+    <tr class="table-bordered">
+        <th>
+            @Html.DisplayNameFor(model => model.Title)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Author)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Publisher)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Title)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Author)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Publisher)
+            </td>
+            <td>
+                <h5 class="text-center">
+                    @Html.ActionLink("Подробности", "Details", new { id = item.BookId })
+                </h5>
+            </td>
+        </tr>
+    }
+
+</table>
